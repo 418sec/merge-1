@@ -99,7 +99,7 @@ Merge.objects = (target = {}, source, { arrayStrategy, ignore = [], parent = '' 
     // Return target if source and target are the same.
     if (value === target[key] || !_exists(value)) return
     
-    // Skip merging if Prototype Pollution attempted
+    // Skip merging if attempting to pollute prototype
     if (isPrototypePolluted(key)) return
 
     // If source is not iterable, overwrite the target.
@@ -194,7 +194,7 @@ function _isIterable (value) {
 /**
  * Blacklist certain keys to prevent Prototype Pollution
  * @param {String} key
- * @return {Boolean}
+ * @return {Boolean} Whether key is blacklisted
  */
 function isPrototypePolluted(key) {
   return ['__proto__', 'constructor', 'prototype'].includes(key)

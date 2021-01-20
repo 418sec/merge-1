@@ -81,6 +81,12 @@ describe('merge()', () => {
     expect(merge('', one, two)).toBe(two)
     expect(merge(one, two)).toBe(two)
   })
+
+  test('should not pollute prototype', () => {
+    let merged = merge({}, JSON.parse('{"__proto__": {"polluted": true}}'));
+    expect(merged).toEqual({})
+    expect({}.polluted).toBe(undefined)
+});
 })
 
 describe('merge({ arrayStrategy })', () => {
